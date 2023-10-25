@@ -15,7 +15,7 @@ function App() {
   });
 
   const posRef = useRef();
-  const screen = window.screen.height - 200;
+  const screen = window.screen.height;
 
   const debouncedGetMovies = useCallback(
     debounce((searchTerm) => {
@@ -41,8 +41,9 @@ function App() {
     if (!posRef.current) return;
     const actualPosition = posRef.current.getBoundingClientRect();
     console.log('estoy dentro', actualPosition.bottom, screen, loading)
-    if (actualPosition.top < screen && !loading) {
+    if (actualPosition.bottom < screen && !loading) {
       setEndPage(true);
+      console.log('manolo')
     } else {
       setEndPage(false);
     }
@@ -71,7 +72,7 @@ function App() {
       </main>
       <footer>
         <p ref={posRef} className='footer_desc'>
-          2023- Jump2Digital
+          2023- Lourdes Juárez to Jump2Digital test
         </p>
       </footer>
     </div>
