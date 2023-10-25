@@ -7,15 +7,21 @@ export function useCharacters({ endPage, searchTerm }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [actualP, setActualP] = useState(2);
+  const [pagesApi, setPagesApi] = useState();
 
 
   const getCharactersByPage = async () => {
+     if (pagesApi !== undefined && actualP > pagesApi) return; 
     try {
       console.log(searchTerm)
       setLoading(true);
       setError(null);
-      const getChara = await getPage(actualP, searchTerm);
+      const { characterList: getChara, responsePages: pages } = await getPage(
+        actualP,
+        searchTerm
+      );
       setCharacters([...characters, ...getChara]);
+            setPagesApi(pages);
     } catch (e) {
       setError(e.message);
     } finally {
@@ -38,6 +44,7 @@ export function useCharacters({ endPage, searchTerm }) {
       setActualP(2)
       const sCharacters = await getCharacters({ search });
       setCharacters(sCharacters);
+      setActualP(2);
     } catch (e) {
       setError(e.message);
     } finally {

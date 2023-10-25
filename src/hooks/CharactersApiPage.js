@@ -7,14 +7,16 @@ export const getPage = async (actualP, search) => {
     );
     const json = await response.json();
     const responseCharacters = json.results;
+    const responsePages = json.info.pages;
 
-    return responseCharacters?.map((chara) => ({
+    const characterList = responseCharacters?.map((chara) => ({
       id: chara.id,
       image: chara.image,
       name: chara.name,
       species: chara.species,
       status: chara.status,
     }));
+    return { characterList, responsePages };
   } catch (e) {
     throw new Error('Error searching next page');
   }

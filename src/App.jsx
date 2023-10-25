@@ -15,7 +15,7 @@ function App() {
   });
 
   const posRef = useRef();
-  const screen = window.screen.height - 200;
+  const screen = window.screen.height;
 
   const debouncedGetMovies = useCallback(
     debounce((searchTerm) => {
@@ -71,7 +71,7 @@ function App() {
       </main>
       <footer>
         <p ref={posRef} className='footer_desc'>
-          2023- Jump2Digital
+          2023- Lourdes Juárez to Jump2Digital test
         </p>
       </footer>
     </div>
