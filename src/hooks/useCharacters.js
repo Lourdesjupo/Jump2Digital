@@ -39,7 +39,6 @@ export function useCharacters({ endPage, searchTerm }) {
     try {
       setLoading(true);
       setError(null);
-      setActualP(2);
       const sCharacters = await getCharacters({ search });
       setCharacters(sCharacters);
       setActualP(2);
