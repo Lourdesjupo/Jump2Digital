@@ -1,4 +1,4 @@
-import { Character } from '/character';
+import { Character } from './Character';
 
 export function Characters({ characters }) {
   const foundChara = characters?.length > 0;
