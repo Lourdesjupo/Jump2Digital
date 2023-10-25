@@ -1,6 +1,5 @@
 //return [{character},{character}]
 export const getPage = async (actualP, search) => {
-  console.log(actualP);
   try {
     const response = await fetch(
       `https://rickandmortyapi.com/api/character/?page=${actualP}&name=${search}`

@@ -6,12 +6,12 @@ import { Loader } from './components/loader';
 import debounce from 'just-debounce-it';
 
 function App() {
-  const [searchTerm, setSearchTerm] =useState('')
+  const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState();
   const [endPage, setEndPage] = useState(false);
   const { characters, loading, searchCharacters } = useCharacters({
     endPage,
-    searchTerm
+    searchTerm,
   });
 
   const posRef = useRef();
@@ -19,10 +19,9 @@ function App() {
 
   const debouncedGetMovies = useCallback(
     debounce((searchTerm) => {
-      console.log('hello', searchTerm);
       searchCharacters(searchTerm);
-    }, 500)
-    ,[]
+    }, 500),
+    []
   );
 
   useEffect(() => {
@@ -34,13 +33,12 @@ function App() {
     const searchElement = ev.target.value;
     setError();
     debouncedGetMovies(searchElement);
-    setSearchTerm(searchElement)
+    setSearchTerm(searchElement);
   };
   //calculates if the end position is displayed on the screen: true - fetch launch
   const location = () => {
     if (!posRef.current) return;
     const actualPosition = posRef.current.getBoundingClientRect();
-    console.log('estoy dentro', actualPosition.bottom, screen, loading)
     if (actualPosition.top < screen && !loading) {
       setEndPage(true);
     } else {
@@ -52,7 +50,12 @@ function App() {
     <div className='page'>
       <header>
         <img className='banner' src='./banner.png' />
-        <form className='form'onSubmit={(ev)=>{ev.preventDefault()}}>
+        <form
+          className='form'
+          onSubmit={(ev) => {
+            ev.preventDefault();
+          }}
+        >
           <input
             style={{
               border: '1px solid transparent',
