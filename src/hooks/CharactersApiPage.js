@@ -1,11 +1,13 @@
 //return [{character},{character}]
-export const getCharacters = async ({ search }) => {
+export const getPage = async (actualP, search) => {
+  console.log(actualP);
   try {
     const response = await fetch(
-      `https://rickandmortyapi.com/api/character/?name=${search}`
+      `https://rickandmortyapi.com/api/character/?page=${actualP}&name=${search}`
     );
     const json = await response.json();
     const responseCharacters = json.results;
+
     return responseCharacters?.map((chara) => ({
       id: chara.id,
       image: chara.image,
@@ -14,6 +16,6 @@ export const getCharacters = async ({ search }) => {
       status: chara.status,
     }));
   } catch (e) {
-    throw new Error('Error searching characters');
+    throw new Error('Error searching next page');
   }
 };
